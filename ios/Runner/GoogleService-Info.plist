@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>843505644448-nc51qp43io528u4ied8a7a1qsnuohoe3.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.843505644448-nc51qp43io528u4ied8a7a1qsnuohoe3</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCQSmXuizayRjLHSBd-PdZzKCDc0HZ-ynI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>843505644448</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>mx.edu.ittepic.damU4Proyecto219400633</string>
+	<key>PROJECT_ID</key>
+	<string>dam-u4-proyecto2-19400633</string>
+	<key>STORAGE_BUCKET</key>
+	<string>dam-u4-proyecto2-19400633.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:843505644448:ios:a2753ff1356b1d3de1aac5</string>
+</dict>
+</plist>
