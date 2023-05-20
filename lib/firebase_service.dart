@@ -63,12 +63,7 @@ Future<void> agregarAsistencia(String idAsistencia, Map<String, dynamic> asisten
 Future<List> consulta4(String Busqueda) async{
   List asistencias = [];
 
-  final AsistenciaSnapshot = await db.collectionGroup('asistencia').orderBy('revisor')
-      .startAt([Busqueda])
-      .endAt([Busqueda + '\uf8ff'])
-      .where('revisor', isGreaterThanOrEqualTo: Busqueda)
-      .where('revisor', isLessThan: Busqueda + 'z')
-      .get();
+  final AsistenciaSnapshot = await db.collectionGroup('asistencia').get();
 
   for(var doc in AsistenciaSnapshot.docs){
     final Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
@@ -86,48 +81,23 @@ Future<List> consulta4(String Busqueda) async{
   return asistencias;
 }
 
-/*
-Future<List> buscarBitacora(String fecha) async{
-  List bitacoras = [];
-  QuerySnapshot querySnapshot = await db.collectionGroup('BITACORA').where('fecha',isEqualTo: fecha).get();
-  querySnapshot.docs.forEach((documento){
-    final Map<String,dynamic> bitacoraData = documento.data() as Map<String,dynamic>;
-    final bitacora = {
-      "fecha": bitacoraData['fecha'],
-      "evento": bitacoraData['evento'],
-      "recursos": bitacoraData['recursos'],
-      "verifico": bitacoraData['verifico'],
-      "fechaverificacion": bitacoraData['fechaverificacion'],
-      "bid":documento.id
-    };
-    bitacoras.add(bitacora);
-  });
-  await Future.delayed(const Duration(seconds:1));
-  return bitacoras;
-}
+Future<List> consulta1(String Busqueda) async{
+  List asistencias = [];
 
-Future<List> buscarVehiculosUso() async{
-  List vehiculos = [];
-  //QuerySnapshot querySnapshot = await db.collection('vehiculo').where('/BITACORA.fechaverificacion',isEqualTo:"12/12/2020").get();
-  QuerySnapshot querySnapshot = await db.collectionGroup('BITACORA').where('fechaverificacion',isEqualTo: "").get();
-  querySnapshot.docs.forEach((documento){
-    DocumentReference autoPadre = documento.reference.parent.parent as DocumentReference<Object?>;
-    autoPadre.get().then((autodoc) {
-      final Map<String,dynamic> data = autodoc.data() as Map<String,dynamic>;
-      final auto = {
-        "placa": data['placa'],
-        "tipo" : data['tipo'],
-        "numeroserie": data['numeroserie'],
-        "combustible": data['combustible'],
-        "tanque" : data['tanque'],
-        "trabajador" : data['trabajador'],
-        "depto": data['depto'],
-        "resguardadopor":data['resguardadopor'],
-        "aid" : autodoc.id
+  QuerySnapshot queryAsigDocente = await db.collection('asignacion').where('docente',isEqualTo: Busqueda).get();
+  queryAsigDocente.docs.forEach((docAsig) async{
+    QuerySnapshot queryAsisDocente = await db.collection('asignacion').doc(docAsig.id).collection('asistencia').get();
+    queryAsisDocente.docs.forEach((docAsis){
+      final Map<String,dynamic> data = docAsis.data() as Map<String,dynamic>;
+      Map<String,dynamic> asistencia = {
+        "fecha": data['fecha'],
+        "revisor": data['revisor']
       };
-      vehiculos.add(auto);
+      asistencias.add(asistencia);
     });
   });
-  await Future.delayed(const Duration(seconds:1));
-  return vehiculos;
-}*/
+  await Future.delayed(const Duration(seconds: 1));
+  return asistencias;
+}
+
+

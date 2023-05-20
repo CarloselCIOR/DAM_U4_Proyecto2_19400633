@@ -58,7 +58,7 @@ class _ConsultasState extends State<Consultas> {
               ),
               DropdownMenuItem(
                 value: Option.ConsultaUno,
-                child: Text("1. Doc - Asistencia"),
+                child: Text("1. Doc- Asistencias"),
               ),
               DropdownMenuItem(
                 value: Option.ConsultaDos,
@@ -86,7 +86,29 @@ class _ConsultasState extends State<Consultas> {
       case Option.ConsultaCero:
         return Text("Selecciona una consulta");
       case Option.ConsultaUno:
-        return Text("asd");
+        return FutureBuilder(
+            future: consulta1(BusquedaController.text),
+            builder: ((context, snapshot){
+              if(snapshot.hasData){
+                return ListView.builder(
+                  itemCount: snapshot.data?.length,
+                  itemBuilder: (context, index){
+                    return InkWell(
+                      child: ListTile(
+                        //leading: ,
+                        title: Text("Revisor: ${snapshot.data?[index]['revisor']}"),
+                        subtitle: Text("Fecha: ${snapshot.data?[index]['fecha']}"),
+                        trailing:Icon(Icons.person),
+                      ),
+                    );
+                  },);
+              }else{
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            })
+        );
 
 
 
